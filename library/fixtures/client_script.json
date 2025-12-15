@@ -1,0 +1,24 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Library Member",
+  "enabled": 1,
+  "modified": "2025-11-27 22:14:08.749465",
+  "module": "Library",
+  "name": "LIbrary Member script",
+  "script": "frappe.ui.form.on('Library Member', {\n    first_name: function(frm) {\n        let full_name = (frm.doc.first_name || '') + ' ' + (frm.doc.last_name || '');\n        frm.set_value('full_name', full_name.trim());\n    },\n\n    last_name: function(frm) {\n        let full_name = (frm.doc.first_name || '') + ' ' + (frm.doc.last_name || '');\n        frm.set_value('full_name', full_name.trim());\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Library Transaction",
+  "enabled": 1,
+  "modified": "2025-12-15 11:41:52.776317",
+  "module": "Library",
+  "name": "Library Transaction script",
+  "script": "frappe.ui.form.on('Library Transaction', {\n    refresh: function(frm) {\n        // Only show button after the document is saved\n        if (!frm.is_new() && frm.doc.status !== 'Returned') {\n            frm.add_custom_button('Return Book', function() {\n                frm.set_value('status', 'Returned');\n                frm.save();\n            });\n        }\n    }\n});\n",
+  "view": "Form"
+ }
+]
